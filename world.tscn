@@ -4,40 +4,62 @@
 [ext_resource type="AudioStream" uid="uid://dj3qq1nm1dmix" path="res://clap-375693.mp3" id="2_fj7yv"]
 
 [sub_resource type="Environment" id="Environment_fj7yv"]
+tonemap_mode = 3
+sdfgi_use_occlusion = true
+fog_enabled = true
+fog_light_energy = 0.3
 
 [node name="Node3D" type="Node3D"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_fj7yv")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.73077023, 0.6826236, 0, -0.6826236, 0.73077023, 0, 6.3638234, 7.6890984)
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_f3sb7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64967203, 0)
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Environment" type="Node3D" parent="."]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1698785, 3.2162223, -2.7232838)
-light_energy = 10.0
-omni_range = 15.0
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_fj7yv")
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Node3D"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.17801507, 0.5883884, -0.78873926, -0.52022004, 0.6241016, 0.5829826, 0.83527374, 0.5140977, 0.19499178, -62.926456, 37.0112, 7.6890984)
+shadow_enabled = true
+shadow_opacity = 0.9
+directional_shadow_mode = 0
+
+[node name="Ground" type="CSGBox3D" parent="Environment"]
 use_collision = true
+size = Vector3(60, 1, 100)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Node3D/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6078491, 0, -1.7929688)
+[node name="Ground2" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.451233, 50, 0)
 use_collision = true
-size = Vector3(26.215698, 1, 18.585938)
+size = Vector3(5.097534, 101, 100)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5513306, 0.15847492, -3.128354)
-operation = 2
+[node name="Pillar" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30162048, 49.806152, 44.46646)
 use_collision = true
-size = Vector3(5.199768, 2.6761475, 9.831055)
+size = Vector3(61, 100, 10)
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Node3D"]
+[node name="Pillar2" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.80162, 49.806152, -15.533539)
+use_collision = true
+size = Vector3(10, 100, 10)
+
+[node name="Pillar4" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.80162, 49.806152, 4.466461)
+use_collision = true
+size = Vector3(10, 100, 10)
+
+[node name="Pillar5" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30162048, 49.806152, -45.53354)
+use_collision = true
+size = Vector3(61, 100, 10)
+
+[node name="Pillar3" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.80162, 49.806152, 24.466461)
+use_collision = true
+size = Vector3(10, 100, 10)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.104372, 2.529107, 0)
 stream = ExtResource("2_fj7yv")
 autoplay = true
