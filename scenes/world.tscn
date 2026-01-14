@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c0j0bjs607b1o"]
 
-[ext_resource type="PackedScene" uid="uid://gmn8k220vefp" path="res://character_body_3d.tscn" id="1_f3sb7"]
-[ext_resource type="AudioStream" uid="uid://dj3qq1nm1dmix" path="res://clap-375693.mp3" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://gmn8k220vefp" path="res://entities/player/player.tscn" id="1_rwgxs"]
+[ext_resource type="AudioStream" uid="uid://dj3qq1nm1dmix" path="res://entities/sound/clap-temp.mp3" id="2_4wyf3"]
 
 [sub_resource type="Environment" id="Environment_fj7yv"]
 background_energy_multiplier = 0.0
@@ -11,7 +11,7 @@ sdfgi_use_occlusion = true
 
 [node name="Node3D" type="Node3D"]
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("1_f3sb7")]
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_rwgxs")]
 transform = Transform3D(0.18424298, 0, -0.9828807, 0, 1, 0, 0.9828807, 0, 0.18424298, -12.145941, 1.6687207, 66.67537)
 
 [node name="Environment" type="Node3D" parent="."]
@@ -102,5 +102,5 @@ size = Vector3(10, 100, 10)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.104372, 2.529107, -31.188614)
-stream = ExtResource("2_fj7yv")
+stream = ExtResource("2_4wyf3")
 autoplay = true
