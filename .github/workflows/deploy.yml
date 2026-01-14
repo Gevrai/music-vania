@@ -1,0 +1,72 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      GODOT_VERSION: "4.5.1-stable"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download Godot
+        run: |
+          # Install Godot
+          (
+            wget -q https://github.com/godotengine/godot-builds/releases/download/${{env.GODOT_VERSION}}/Godot_v${{env.GODOT_VERSION}}_linux.x86_64.zip
+            unzip Godot_v${{env.GODOT_VERSION}}_linux.x86_64.zip
+            chmod +x Godot_v${{env.GODOT_VERSION}}_linux.x86_64
+          ) &
+
+          # Install export templates
+          (
+            dest_dir=$(echo '${{env.GODOT_VERSION}}' | tr '-' '.')
+            wget -q https://github.com/godotengine/godot-builds/releases/download/${{env.GODOT_VERSION}}/Godot_v${{env.GODOT_VERSION}}_export_templates.tpz
+            mkdir -p ~/.local/share/godot/export_templates/$dest_dir
+            unzip -j Godot_v${{env.GODOT_VERSION}}_export_templates.tpz 'templates/web*' -d ~/.local/share/godot/export_templates/$dest_dir
+            cd ~/.local/share/godot/export_templates/$dest_dir
+            pwd
+            ls -al
+          ) &
+
+          wait
+
+
+      - name: Build HTML5 export
+        run: |
+          mkdir -p build
+          ./Godot_v${{env.GODOT_VERSION}}_linux.x86_64 \
+            --headless \
+            --export-release "Web" \
+            build/index.html
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'build'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
