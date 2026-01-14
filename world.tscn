@@ -4,15 +4,15 @@
 [ext_resource type="AudioStream" uid="uid://dj3qq1nm1dmix" path="res://clap-375693.mp3" id="2_fj7yv"]
 
 [sub_resource type="Environment" id="Environment_fj7yv"]
+background_energy_multiplier = 0.0
+ambient_light_energy = 0.18
 tonemap_mode = 3
 sdfgi_use_occlusion = true
-fog_enabled = true
-fog_light_energy = 0.3
 
 [node name="Node3D" type="Node3D"]
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_f3sb7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64967203, 0)
+transform = Transform3D(0.18424298, 0, -0.9828807, 0, 1, 0, 0.9828807, 0, 0.18424298, -12.145941, 1.6687207, 66.67537)
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -22,22 +22,63 @@ environment = SubResource("Environment_fj7yv")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-0.17801507, 0.5883884, -0.78873926, -0.52022004, 0.6241016, 0.5829826, 0.83527374, 0.5140977, 0.19499178, -62.926456, 37.0112, 7.6890984)
 shadow_enabled = true
-shadow_opacity = 0.9
 directional_shadow_mode = 0
+directional_shadow_split_1 = 0.2
+directional_shadow_max_distance = 200.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2149595, 1.617331, 68.8439)
+light_color = Color(0.46618086, 0.4661808, 0.4661808, 1)
+omni_range = 1.436
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.188067, 1.617331, 68.8439)
+light_color = Color(0.46618086, 0.4661808, 0.4661808, 1)
+omni_range = 1.436
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8275037, 1.617331, 68.8439)
+light_color = Color(0.46618086, 0.4661808, 0.4661808, 1)
+omni_range = 1.436
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.665988, 1.617331, 68.8439)
+light_color = Color(0.46618086, 0.4661808, 0.4661808, 1)
+omni_range = 1.436
 
 [node name="Ground" type="CSGBox3D" parent="Environment"]
 use_collision = true
 size = Vector3(60, 1, 100)
+
+[node name="Ceiling" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 72.59456, 0)
+use_collision = true
+size = Vector3(60, 40, 100)
+
+[node name="Ground4" type="CSGBox3D" parent="Environment/Ceiling"]
+operation = 2
+use_collision = true
+size = Vector3(10, 40, 60)
 
 [node name="Ground2" type="CSGBox3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.451233, 50, 0)
 use_collision = true
 size = Vector3(5.097534, 101, 100)
 
-[node name="Pillar" type="CSGBox3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30162048, 49.806152, 44.46646)
+[node name="SouthWall" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30162048, 49.806152, 61.06845)
 use_collision = true
-size = Vector3(61, 100, 10)
+size = Vector3(61, 100, 43.20398)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment/SouthWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -46.27086, -10.112671)
+operation = 2
+size = Vector3(5, 5, 30.225342)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Environment/SouthWall"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6.308655, -46.271, 6)
+operation = 2
+size = Vector3(5, 5, 17.61731)
 
 [node name="Pillar2" type="CSGBox3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.80162, 49.806152, -15.533539)
@@ -60,6 +101,6 @@ use_collision = true
 size = Vector3(10, 100, 10)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.104372, 2.529107, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.104372, 2.529107, -31.188614)
 stream = ExtResource("2_fj7yv")
 autoplay = true

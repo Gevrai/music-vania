@@ -9,7 +9,7 @@ extends CharacterBody3D
 @export var gravity: float = 24.0
 @export_range( -89.0, 89.0 ) var max_pitch_deg: float = 89.0
 
-@onready var _camera_pivot: Node3D = %Camera3D
+@onready var _camera_pivot: Node3D = %CameraPivot
 
 var _yaw: float = 0.0
 var _pitch: float = 0.0
@@ -17,6 +17,8 @@ var _pitch: float = 0.0
 var _prev_space_pressed: bool = false
 
 func _ready() -> void:
+	# Initialize yaw to current rotation (accounts for any parent rotation in scene)
+	_yaw = rotation_degrees.y
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _unhandled_input(event: InputEvent) -> void:
