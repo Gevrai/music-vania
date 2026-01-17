@@ -86,7 +86,7 @@ use_collision = true
 size = Vector3(10, 100, 10)
 
 [node name="Pillar4" type="CSGBox3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.80162, 49.806152, 4.466461)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.80162, 59.615013, 4.466461)
 use_collision = true
 size = Vector3(10, 100, 10)
 
