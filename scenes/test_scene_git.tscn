@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvhceswincxjl"]
+
+[ext_resource type="PackedScene" uid="uid://bukvwcugfk8u3" path="res://Props/most_beautiful_asset_in_the_world.blend" id="1_wihom"]
+[ext_resource type="PackedScene" uid="uid://gmn8k220vefp" path="res://entities/player/player.tscn" id="2_b6hln"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_f3v12"]
+size = Vector2(10, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wihom"]
+data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
+
+[node name="TestSceneGit" type="Node3D"]
+
+[node name="most_beautiful_asset_in_the_world" parent="." instance=ExtResource("1_wihom")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50221205, -3.1742725)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_f3v12")
+skeleton = NodePath("../most_beautiful_asset_in_the_world")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_wihom")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("2_b6hln")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5039978, 0, -12.832801)
+metadata/_edit_group_ = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.044151545, -0.86602545, -0.4980468, -0.0764729, -0.49999997, 0.8626424, -0.99609363, 8.708128e-08, -0.088303246, 0, 23.444874, 0)
